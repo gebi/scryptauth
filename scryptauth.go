@@ -1,5 +1,4 @@
-/*
-scryptauth is a GO library for secure password handling
+/* scryptauth is a GO library for secure password handling
 
 It uses hmac(scrypt(user_password, salt), server_key) to protect against
 both dictionarry attacks and DB leaks.
