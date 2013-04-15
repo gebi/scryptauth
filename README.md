@@ -1,4 +1,4 @@
 go-scryptauth
 =============
 
-Password Authentication using Scrypt using additional HMAC protection
+Password Authentication using Scrypt with additional HMAC protection
