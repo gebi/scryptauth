@@ -1,4 +1,4 @@
-go-scryptauth
-=============
+scryptauth
+==========
 
-Password Authentication using Scrypt with additional HMAC protection
+scryptauth is a go/golang library for secure password handling.
