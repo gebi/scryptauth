@@ -30,7 +30,7 @@ func New(pw_cost uint, hmac_key []byte) (*ScryptAuth, error) {
 	if len(hmac_key) != KEYLENGTH {
 		return nil, errors.New("scryptauth new() - unsupported hmac_key length")
 	}
-	return &ScryptAuth{HmacKey: hmac_key, N: 1 << pw_cost, R: 8, P: 1}, nil
+	return &ScryptAuth{HmacKey: hmac_key, N: 1<<pw_cost, R: 8, P: 1}, nil
 }
 
 func (s ScryptAuth) Hash(user_password, salt []byte) (result []byte, err error) {
