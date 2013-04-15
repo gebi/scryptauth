@@ -21,7 +21,6 @@ func init() {
 func TestNew(t *testing.T) {
 	tmp, err := New(12, hmac_key)
 	assert.Equal(t, err, nil)
-	assert.Equal(t, tmp.N, 1<<12)
 
 	tmp, err = New(33, hmac_key)
 	assert.NotEqual(t, err, nil)
@@ -37,7 +36,7 @@ func TestHash(t *testing.T) {
 	   }
 	*/
 
-	h, err := x.Hash([]byte("bar"), salt)
+	h, err := x.Hash(x.PwCost, []byte("bar"), salt)
 	assert.Equal(t, err, nil)
 	hash := fmt.Sprintf("%x", h)
 
@@ -45,9 +44,9 @@ func TestHash(t *testing.T) {
 }
 
 func TestHashCheck(t *testing.T) {
-	h, err := x.Hash([]byte("bar"), salt)
+	h, err := x.Hash(x.PwCost, []byte("bar"), salt)
 	assert.Equal(t, err, nil)
-	ok, err := x.Check(h, []byte("bar"), salt)
+	ok, err := x.Check(x.PwCost, h, []byte("bar"), salt)
 	assert.Equal(t, ok, true)
 	assert.Equal(t, err, nil)
 }
@@ -58,7 +57,7 @@ func TestGenCheck(t *testing.T) {
 	assert.NotEqual(t, h, nil)
 	assert.NotEqual(t, s, nil)
 
-	ok, err := x.Check(h, []byte("bar"), s)
+	ok, err := x.Check(x.PwCost, h, []byte("bar"), s)
 	assert.Equal(t, ok, true)
 	assert.Equal(t, err, nil)
 }

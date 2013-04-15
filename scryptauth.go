@@ -11,9 +11,9 @@ import (
 
 type ScryptAuth struct {
 	HmacKey []byte
+	PwCost  uint
 
 	// scrypt parameter
-	N int
 	R int
 	P int
 }
@@ -24,17 +24,17 @@ const (
 )
 
 func New(pw_cost uint, hmac_key []byte) (*ScryptAuth, error) {
-	if pw_cost > 32 && pw_cost%2 != 0 {
+	if pw_cost > 32 {
 		return nil, errors.New("scryptauth new() - invalid pw_cost specified")
 	}
 	if len(hmac_key) != KEYLENGTH {
 		return nil, errors.New("scryptauth new() - unsupported hmac_key length")
 	}
-	return &ScryptAuth{HmacKey: hmac_key, N: 1<<pw_cost, R: 8, P: 1}, nil
+	return &ScryptAuth{HmacKey: hmac_key, PwCost: pw_cost, R: 8, P: 1}, nil
 }
 
-func (s ScryptAuth) Hash(user_password, salt []byte) (result []byte, err error) {
-	scrypt_hash, err := scrypt.Key(user_password, salt, s.N, s.R, s.P, KEYLENGTH)
+func (s ScryptAuth) Hash(pw_cost uint, user_password, salt []byte) (result []byte, err error) {
+	scrypt_hash, err := scrypt.Key(user_password, salt, 1<<pw_cost, s.R, s.P, KEYLENGTH)
 	if err != nil {
 		return
 	}
@@ -46,8 +46,8 @@ func (s ScryptAuth) Hash(user_password, salt []byte) (result []byte, err error) 
 	return
 }
 
-func (s ScryptAuth) Check(hash_ref, user_password, salt []byte) (chk bool, err error) {
-	result_hash, err := s.Hash(user_password, salt)
+func (s ScryptAuth) Check(pw_cost uint, hash_ref, user_password, salt []byte) (chk bool, err error) {
+	result_hash, err := s.Hash(pw_cost, user_password, salt)
 	if err != nil {
 		return false, err
 	}
@@ -67,7 +67,7 @@ func (s ScryptAuth) Gen(user_password []byte) (hash, salt []byte, err error) {
 		return nil, nil, err
 	}
 
-	hash, err = s.Hash(user_password, salt)
+	hash, err = s.Hash(s.PwCost, user_password, salt)
 	if err != nil {
 		return nil, nil, err
 	}
