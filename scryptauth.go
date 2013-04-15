@@ -20,8 +20,8 @@ import (
 )
 
 type ScryptAuth struct {
-	HmacKey []byte  // HMAC key used to secure scrypt hash
-	PwCost  uint    // PwCost parameter used to calculate N parameter of scrypt (1<<PwCost == N)
+	HmacKey []byte // HMAC key used to secure scrypt hash
+	PwCost  uint   // PwCost parameter used to calculate N parameter of scrypt (1<<PwCost == N)
 
 	// scrypt parameter
 	R int

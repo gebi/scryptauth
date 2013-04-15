@@ -73,9 +73,9 @@ func ExampleScryptAuth_Gen() {
 		return
 	}
 	hash, salt, err := pwhash.Gen(user_password)
-    if err != nil {
-        fmt.Print(err)
-        return
-    }
+	if err != nil {
+		fmt.Print(err)
+		return
+	}
 	fmt.Printf("hash=%x salt=%x\n", hash, salt)
 }
