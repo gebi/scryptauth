@@ -63,7 +63,7 @@ func TestGenCheck(t *testing.T) {
 }
 
 // Example function showing usage of generating hash of user_password
-func ExampleGenHash() {
+func ExampleScryptAuth_Gen() {
 	hmac_key := []byte("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA") // PLEASE CHANGE THIS KEY FOR PRODUCTION USE
 	user_password := []byte("test123")
 

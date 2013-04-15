@@ -31,7 +31,7 @@ func TestEncodeDecodeBase64(t *testing.T) {
 }
 
 // Sample Function to generate new password hash for storing in DB
-func ExampleEncode() {
+func ExampleEncodeBase64() {
 	hmac_key := []byte("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA") // PLEASE CHANGE THIS KEY FOR PRODUCTION USE
 	user_password := []byte("test123")
 
@@ -50,7 +50,7 @@ func ExampleEncode() {
 }
 
 // Sample function to verify stored hash from DB
-func ExampleDecode() {
+func ExampleDecodeBase64() {
 	db_string := "12:3Tnrsg5-QaM7OsyRvqcBv9qS-jqGxzRIXQqvbTUf894=:HrHzQ4S016BffZ2TmwLRYYiIggfSmkwKdEtd1Pk_b-I="
 	hmac_key := []byte("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA") // PLEASE CHANGE THIS KEY FOR PRODUCTION USE
 	user_password := []byte("bar")
