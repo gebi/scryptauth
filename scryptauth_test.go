@@ -61,3 +61,21 @@ func TestGenCheck(t *testing.T) {
 	assert.Equal(t, ok, true)
 	assert.Equal(t, err, nil)
 }
+
+// Example function showing usage of generating hash of user_password
+func ExampleGenHash() {
+	hmac_key := []byte("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA") // PLEASE CHANGE THIS KEY FOR PRODUCTION USE
+	user_password := []byte("test123")
+
+	pwhash, err := New(12, hmac_key)
+	if err != nil {
+		fmt.Print(err)
+		return
+	}
+	hash, salt, err := pwhash.Gen(user_password)
+    if err != nil {
+        fmt.Print(err)
+        return
+    }
+	fmt.Printf("hash=%x salt=%x\n", hash, salt)
+}

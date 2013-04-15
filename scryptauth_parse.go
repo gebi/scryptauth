@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// Parses "pw_cost:base64(hash):base64(salt)"
 func DecodeBase64(str string) (pw_cost uint, hash, salt []byte, err error) {
 	tmp := strings.SplitN(str, ":", 3)
 	tmp_pwcost, err := strconv.ParseUint(tmp[0], 10, 0)
@@ -29,6 +30,7 @@ func DecodeBase64(str string) (pw_cost uint, hash, salt []byte, err error) {
 	return
 }
 
+// Encodes into "pw_cost:base64(hash):base64(salt)"
 func EncodeBase64(pw_cost uint, hash, salt []byte) (str string) {
 	b64_salt := base64.URLEncoding.EncodeToString(salt)
 	b64_hash := base64.URLEncoding.EncodeToString(hash)
