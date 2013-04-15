@@ -1,12 +1,14 @@
 /* scryptauth is a GO library for secure password handling
 
 It uses hmac(scrypt(user_password, salt), server_key) to protect against
-both dictionarry attacks and DB leaks.
+both dictionary attacks and DB leaks.
 
 scryptauth additionally provides encode/decode routines using base64 to create strings
 for storing into a DB.
 
-Copyright Michael Gebetsroither 2012 (michael \x40 mgeb \x2e org)
+Copyright: Michael Gebetsroither 2012 (michael \x40 mgeb \x2e org)
+
+License: New BSD
 */
 package scryptauth
 
