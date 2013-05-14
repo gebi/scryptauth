@@ -46,7 +46,7 @@ func New(pw_cost uint, hmac_key []byte) (*ScryptAuth, error) {
 	return &ScryptAuth{HmacKey: hmac_key, PwCost: pw_cost, R: 8, P: 1}, nil
 }
 
-// Create hash_ref suitable from Check()
+// Create hash_ref suitable for later invocation of Check()
 func (s ScryptAuth) Hash(pw_cost uint, user_password, salt []byte) (hash_ref []byte, err error) {
 	scrypt_hash, err := scrypt.Key(user_password, salt, 1<<pw_cost, s.R, s.P, KEYLENGTH)
 	if err != nil {
