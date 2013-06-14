@@ -33,6 +33,10 @@ type ScryptAuth struct {
 const (
 	// Key length and salt length are 32 bytes (256 bits)
 	KEYLENGTH = 32
+
+	// scrypt default parameters
+	SCRYPT_CONST_R = 8
+	SCRYPT_CONST_P = 1
 )
 
 // Initialise ScryptAuth struct
@@ -43,7 +47,7 @@ func New(pw_cost uint, hmac_key []byte) (*ScryptAuth, error) {
 	if len(hmac_key) != KEYLENGTH {
 		return nil, errors.New("scryptauth new() - unsupported hmac_key length")
 	}
-	return &ScryptAuth{HmacKey: hmac_key, PwCost: pw_cost, R: 8, P: 1}, nil
+	return &ScryptAuth{HmacKey: hmac_key, PwCost: pw_cost, R: SCRYPT_CONST_R, P: SCRYPT_CONST_P}, nil
 }
 
 // Create hash_ref suitable for later invocation of Check()
