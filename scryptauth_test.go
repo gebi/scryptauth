@@ -10,6 +10,7 @@ var (
 	x        *ScryptAuth
 	salt     []byte
 	hmac_key []byte
+	result   []byte
 )
 
 func init() {
@@ -61,6 +62,28 @@ func TestGenCheck(t *testing.T) {
 	assert.Equal(t, ok, true)
 	assert.Equal(t, err, nil)
 }
+
+func benchmarkScrypt(i int, b *testing.B) {
+	user_pw := []byte("bar")
+	var r []byte
+	for n := 0; n < b.N; n++ {
+		r, _ = x.Hash(uint(i), user_pw, salt)
+	}
+	result = r
+}
+
+func BenchmarkScrypt8(b *testing.B)  { benchmarkScrypt(8, b) }
+func BenchmarkScrypt9(b *testing.B)  { benchmarkScrypt(9, b) }
+func BenchmarkScrypt10(b *testing.B) { benchmarkScrypt(10, b) }
+func BenchmarkScrypt11(b *testing.B) { benchmarkScrypt(11, b) }
+func BenchmarkScrypt12(b *testing.B) { benchmarkScrypt(12, b) }
+func BenchmarkScrypt13(b *testing.B) { benchmarkScrypt(13, b) }
+func BenchmarkScrypt14(b *testing.B) { benchmarkScrypt(14, b) }
+func BenchmarkScrypt15(b *testing.B) { benchmarkScrypt(15, b) }
+func BenchmarkScrypt16(b *testing.B) { benchmarkScrypt(16, b) }
+func BenchmarkScrypt17(b *testing.B) { benchmarkScrypt(17, b) }
+func BenchmarkScrypt18(b *testing.B) { benchmarkScrypt(18, b) }
+func BenchmarkScrypt19(b *testing.B) { benchmarkScrypt(19, b) }
 
 // Example function showing usage of generating hash of user_password
 func ExampleScryptAuth_Gen() {
