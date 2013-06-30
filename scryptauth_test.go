@@ -67,6 +67,7 @@ func ExampleScryptAuth_Gen() {
 	hmac_key := []byte("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA") // PLEASE CHANGE THIS KEY FOR PRODUCTION USE
 	user_password := []byte("test123")
 
+	// Create new instace of scryptauth with strength factor 12 and hmac_key
 	pwhash, err := New(12, hmac_key)
 	if err != nil {
 		fmt.Print(err)
