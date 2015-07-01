@@ -13,12 +13,12 @@ License: BSD 2 clause
 package scryptauth
 
 import (
-	"code.google.com/p/go.crypto/scrypt"
 	"crypto/hmac"
 	"crypto/rand"
 	"crypto/sha256"
 	"crypto/subtle"
 	"errors"
+	"golang.org/x/crypto/ssh"
 )
 
 type ScryptAuth struct {
