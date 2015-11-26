@@ -18,7 +18,7 @@ import (
 	"crypto/sha256"
 	"crypto/subtle"
 	"errors"
-	"golang.org/x/crypto/ssh"
+	"golang.org/x/crypto/scrypt"
 )
 
 type ScryptAuth struct {
